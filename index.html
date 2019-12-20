@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>SPEED TYPING TEST</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <Style>
+       *{
+           margin: 0;
+           padding: 0;
+       }
+       body{
+           box-sizing: border-box;
+           background: cornsilk;
+       }
+      .container-{
+        width:100vw;
+        background: rgb(179, 233, 215);
+      }
+      .container{
+          background: rgb(252, 251, 250);
+          max-height:100vh;
+          width:100%;
+          top:4rem;
+          position: relative;
+      }
+      span{
+          color:rgb(89, 170, 7);
+      }
+      .form-control{
+          width:50%;
+          position:relative;
+          left:25%;
+         }
+      @media(max-width:700px){
+        .form-control{
+            width:75%;
+            position: relative;
+            left: 40px;
+        }
+      }
+         
+    
+    </Style>
+</head>
+
+<body>
+        <div class="container- text-center">
+               <h1>WORD BEATER</h1>
+        </div>
+        <div class="container">
+            <br>
+                <h5 class="text-center">TYPE THE WITHIN <span id="seconds">5</span> SECONDS</h5>
+                <br>
+                <h1 class="words text-center" id="current-word">Hello</h1>
+                <br>
+                <form class="text-center" autocomplete="off">
+                        <div class="form-group">
+                          <label for="formGroupExampleInput">TYPE HERE</label>
+                          <br>
+                          <input  type="text"  class="form-control"   id="word-input"placeholder="Start Typing...">
+                         
+                        </div>
+                        <h4 class="text-center" id="message"></h4>
+                </form>
+                <br>
+                <h4 class="words text-center">Time Left:<span id="time">0</span></h4>
+                <h4 class="words text-center">Score:<span id="score">0</span></h4>
+               <br>
+                <div class="card " style="width:auto;">
+                        <div class="card-body text-center">
+                          <h5 class="card-title">INSTRUCTION</h5>
+                          <p class="card-text">Type each word in the given amount of seconds to score .To play again,just type the current word.Your score will reset.</p>
+                          
+                        </div>
+                    
+                      </div>
+                      
+                      <br>
+
+        </div>
+
+
+
+<script>
+  window.addEventListener('load',init);
+  //globals
+  let time=5;
+  let score=0;
+  let isPlaying;
+  //Dom elements
+  const WordInput=document.querySelector('#word-input');
+  const currentWord=document.querySelector('#current-word');
+  const scoreDisplay=document.querySelector('#score');
+  const timeDisplay=document.querySelector('#time');
+  const message=document.querySelector('#message');
+  const seconds=document.querySelector('#seconds');
+  const words = [
+  'hat',
+  'river',
+  'lucky',
+  'statue',
+  'generate',
+  'stubborn',
+  'cocktail',
+  'runaway',
+  'joke',
+  'developer',
+  'establishment',
+  'hero',
+  'javascript',
+  'nutrition',
+  'revolver',
+  'echo',
+  'siblings',
+  'investigate',
+  'horrendous',
+  'symptom',
+  'laughter',
+  'magic',
+  'master',
+  'space',
+  'definition',
+  'according',
+'account',
+'across',
+'act',
+'action',
+'activity',
+'actually',
+'add',
+'adversity',
+'complication',
+'crisis',
+'deadlock',
+'dilemma',
+'frustration',
+'hardship',
+'hazard'
+
+];
+
+function init(){
+ showWords(words);
+ setInterval(countdown,1000);
+ setInterval(checkStatus,50)
+ WordInput.addEventListener('input',startMatch);
+}
+function startMatch(){
+  if(matchWords()){
+  isPlaying = true;
+  time=6;
+  showWords(words);
+  WordInput.value="";
+  score++;
+  }if(score === -1){
+    scoreDisplay.innerHTML=0;
+  }else{
+    scoreDisplay.innerHTML=score;
+  }
+  
+
+}
+function matchWords(){
+  
+if(WordInput.value === currentWord.innerHTML){
+  message.innerHTML="correct!!!";
+  return true;
+
+}else{
+  message.innerHTML="";
+  return false;
+}
+  }
+
+
+function showWords(words){
+  const randIndex = Math.floor(Math.random()*words.length);
+
+  currentWord.innerHTML = words[randIndex];
+}
+function countdown(){
+  if(time>0){
+    time--;
+  }
+  else if(time === 0){
+    isPlaying = false;
+  }
+  timeDisplay.innerHTML = time;
+}
+function checkStatus(){
+  if(!isPlaying && time ===0){
+    message.innerHTML="GAME OVER!!!"
+    score = 0;
+  }
+}
+
+</script>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+</html>
